@@ -10,28 +10,40 @@
 import createHeader from "./components/header";
 import createFooter from "./components/footer";
 import { add } from "./utils/math";
+import { toKebabCase } from "./utils/strings.js";
+
+
+// Import Styles
+import "./styles.scss";
+
 
 function main() {
-  const root = document.getElementById("app-root");
+    const root = document.getElementById("app-root");
 
-  if (!root) return;
+    if (!root) return;
 
-  // First, we need to call the individual functions that create our app components
-  const appContainer = document.createElement("div");
-  appContainer.className = "app-root";
+    // First, we need to call the individual functions that create our app components
+    const appContainer = document.createElement("div");
+    appContainer.className = "app-root";
 
-  const header = createHeader();
+    const header = createHeader();
 
-  const resultParagraph = document.createElement("p");
-  resultParagraph.textContent = `Example: add(2, 3) = ${add(2, 3)}`;
+    const resultParagraph = document.createElement("p");
+    resultParagraph.textContent = `Example: add(2, 3) = ${add(2, 3)}`;
 
-  const footer = createFooter();
+    const kebabParagraph = document.createElement("p");
+    kebabParagraph.textContent = `Kebab case of "Webpack Bundler Demo" is: ${toKebabCase(
+        "Webpack Bundler Demo"
+    )}`;
 
-  appContainer.appendChild(header);
-  appContainer.appendChild(resultParagraph);
-  appContainer.appendChild(footer);
+    const footer = createFooter();
 
-  root.appendChild(appContainer);
+    appContainer.appendChild(header);
+    appContainer.appendChild(resultParagraph);
+    appContainer.appendChild(kebabParagraph);
+    appContainer.appendChild(footer);
+
+    root.appendChild(appContainer);
 }
 
 //Execute main to start the app
