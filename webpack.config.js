@@ -5,6 +5,9 @@
   - Mode: development by default (overridden via scripts)
   - DevServer: serves files from dist and opens browser
   - HtmlWebpackPlugin: uses src/index.html as a template
+  - Loaders:
+    - SCSS via sass-loader, css-loader and style-loader
+
 */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -35,7 +38,18 @@ module.exports = {
 
     // For Day 1 we do not configure loaders yet (only JS bundling).
     module: {
-        rules: []
+        rules: [
+            {
+                // Handle .scss files with sass-loader, css-loader, and style-loader
+                test: /\.scss$/,
+                use: [
+                    "style-loader", // 3. Injects styles into the DOM
+                    "css-loader",   // 2. Turns CSS into CommonJS modules
+                    "sass-loader"   // 1. Compiles SCSS to CSS
+                ]
+
+            }
+        ]
     },
 
     plugins: [
