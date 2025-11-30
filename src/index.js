@@ -9,7 +9,7 @@
 
 import createHeader from "./components/header";
 import createFooter from "./components/footer";
-import { add } from "./utils/math";
+import { add, safeDivide, addMany } from "./utils/math";
 import { toKebabCase } from "./utils/strings.js";
 
 
@@ -31,6 +31,28 @@ function main() {
     const resultParagraph = document.createElement("p");
     resultParagraph.textContent = `Example: add(2, 3) = ${add(2, 3)}`;
 
+    // Example: using addMany with rest parameters and reduce
+    const sumExample = addMany(1, 2, 3, 4, 5);
+
+    // Example: optional chaining and nullish coalescing
+    const config = {
+        title: "Webpack Bundler Demo",
+        theme: {
+            accentColor: "#38bdf8"
+        }
+    };
+
+    const accentColor = config.theme?.accentColor ?? "#f97316";
+
+    const summaryParagraph = document.createElement("p");
+    summaryParagraph.textContent = `addMany(1, 2, 3, 4, 5) = ${sumExample}. Accent color is ${accentColor}.`;
+
+    const divideResult = safeDivide(10, 0);
+    const divideParagraph = document.createElement("p");
+    divideParagraph.textContent = `safeDivide(10, 0) => ${divideResult ?? "null (cannot divide by zero)"
+        }`;
+
+
     const kebabParagraph = document.createElement("p");
     kebabParagraph.textContent = `Kebab case of "Webpack Bundler Demo" is: ${toKebabCase(
         "Webpack Bundler Demo"
@@ -39,6 +61,8 @@ function main() {
     const footer = createFooter();
 
     appContainer.appendChild(header);
+    appContainer.appendChild(summaryParagraph);
+    appContainer.appendChild(divideParagraph);
     appContainer.appendChild(resultParagraph);
     appContainer.appendChild(kebabParagraph);
     appContainer.appendChild(footer);
