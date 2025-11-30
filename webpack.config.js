@@ -48,6 +48,15 @@ module.exports = {
                     "sass-loader"   // 1. Compiles SCSS to CSS
                 ]
 
+            },
+            {
+                // Transpile JS files using Babel (excluding node_modules)
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader"
+                    // Babel options are read from babel.config.json
+                }
             }
         ]
     },
