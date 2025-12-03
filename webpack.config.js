@@ -15,7 +15,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 /** @type {import('webpack').Configuration} */
 module.exports = {
     // Main entry point of the application
-    entry: './src/index.js',
+    entry: './src/day3.js',
+
     // Output configuration
     output: {
         filename: 'main.js',
@@ -64,7 +65,7 @@ module.exports = {
     plugins: [
         // Generate an index.html in dist using src/index.html as a template
         new HtmlWebpackPlugin({
-            template: "./src/index.html",
+            template: "./src/day3.html",
             title: "Webpack Bundler Demo"
         })
     ]
