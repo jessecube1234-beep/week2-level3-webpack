@@ -15,12 +15,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 /** @type {import('webpack').Configuration} */
 module.exports = {
     // Main entry point of the application
-    entry: './src/index.js',
+    entry: {
+        index: './src/index.js',
+        main: './src/main.js',
+    },
+
     // Output configuration
     output: {
-        filename: 'main.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true, // Clean the output directory before emit
+        clean: true,
     },
 
     // Default mode is 'development'
@@ -43,11 +47,20 @@ module.exports = {
                 // Handle .scss files with sass-loader, css-loader, and style-loader
                 test: /\.scss$/,
                 use: [
-                    "style-loader", // 3. Injects styles into the DOM
-                    "css-loader",   // 2. Turns CSS into CommonJS modules
-                    "sass-loader"   // 1. Compiles SCSS to CSS
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }
                 ]
-
             },
             {
                 // Transpile JS files using Babel (excluding node_modules)
@@ -66,6 +79,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html",
             title: "Webpack Bundler Demo"
+        }),
+        new HtmlWebpackPlugin({
+            template: "./src/about.html",
+            filename: "about.html",
+            title: "About Page"
         })
     ]
 };
